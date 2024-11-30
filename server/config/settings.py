@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 THIRD_PARTY_APPS = [
     'rest_framework',
+    'corsheaders',
 ]
 CUSTOM_APPS = [
     "userdata.apps.UserdataConfig",
@@ -57,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -138,3 +141,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ],
 }
+
+CORS_ALLOW_ALL_ORIGINS = True

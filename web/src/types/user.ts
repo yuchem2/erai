@@ -1,5 +1,7 @@
 export interface IPostUserdataRequest {
-    userUrl: string
+    body: {
+        user_url: string
+    }
 }
 
 export interface IPostUserdataResponse {
