@@ -15,4 +15,5 @@ class UserDataCrawler(APIView):
     def post(self, request):
         user_url = request.data.get("user_url")
         crawling_result = get_user_data(user_url)
+        print(type(crawling_result))
         return Response(crawling_result,status=HTTP_200_OK)

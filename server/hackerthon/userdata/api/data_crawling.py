@@ -124,10 +124,29 @@ def velog_crawling(user_url):
     try:
         print("Velog 블로그 크롤링 시작...")
         posts = crawl_posts_with_click(base_url, driver)
-
         return posts  # 크롤링 결과를 객체로 반환
     finally:
         driver.quit()
+
+# 전처리 및 스타일 태그 적용 함수
+def process_data(data):
+    result = []
+    
+    for item in data:
+        content = item["content"]
+        # 문장을 ?, !, . 으로 분리
+        sentences = re.split(r'([.!?])', content)
+        # 재조합: 문장과 구분자를 다시 합치기
+        sentences = ["".join(x) for x in zip(sentences[::2], sentences[1::2])]
+        # 스타일 태그 적용
+        styled_sentences = []
+        for i in range(len(sentences) - 1):
+            styled_sentences.append(
+                f'<STYLE style="userStyle">{sentences[i]} {sentences[i+1]}</STYLE>'
+            )
+        result.extend(styled_sentences)
+    return result
+
 
 def get_user_data(user_url ):
     tistory_pattern = r"^https://[a-zA-Z0-9\-]+\.tistory\.com/$"
@@ -137,7 +156,10 @@ def get_user_data(user_url ):
         return crawling_result
     elif re.match(velog_pattern, user_url):
         crawling_result= velog_crawling(user_url)
-        return crawling_result
+        
+        processed_data = process_data(crawling_result)
+        
+        return {"data":processed_data}
     else:
         return "Url is not correct."
     
