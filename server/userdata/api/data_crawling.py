@@ -12,7 +12,7 @@ def get_driver():
     options.add_argument("--headless")  # 브라우저 창 없이 실행
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
-    service = Service("/Users/koomin/Downloads/chromedriver-mac-arm64/chromedriver")  # ChromeDriver 경로 설정
+    service = Service("C:\Program Files\Google\Chrome\chromedriver.exe")  # ChromeDriver 경로 설정
     driver = webdriver.Chrome(service=service, options=options)
     return driver
 
