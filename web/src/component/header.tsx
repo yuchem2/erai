@@ -10,7 +10,7 @@ const drawerWidth = 400
 const appBarHeight = 64
 export function Header() {
     const [open, setOpen] = useState(false)
-    const [selectedPage, setSelectedPage] = useState('Crawling')
+    const [selectedPage, setSelectedPage] = useState('crawling')
 
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen)

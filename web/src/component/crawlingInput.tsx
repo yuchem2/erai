@@ -24,7 +24,9 @@ export default function CrawlingInput() {
 
     const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
         const request: IPostUserdataRequest = {
-            userUrl: data.url,
+            body: {
+                user_url: data.url
+            },
         }
         mutation.mutate(request)
     }
