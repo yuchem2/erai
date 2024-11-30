@@ -105,7 +105,7 @@ def crawl_posts_with_click(base_url, driver):
             # 데이터 저장
             post_data.append({
                 "title": post_title,
-                "content": content,
+                "content": content.replace("\n",""),
             })
 
             # 이전 페이지로 돌아가기
