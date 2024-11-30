@@ -31,7 +31,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <body className={inter.className}>
                 <QueryClientProvider client={queryClient}>
                     <div className="flex flex-col w-full h-full p-4 bg-[#3B3B3B]">
-                        <Header>{children}</Header>
+                        <Header />
+                        {children}
                     </div>
                 </QueryClientProvider>
             </body>
