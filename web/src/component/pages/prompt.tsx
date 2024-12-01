@@ -94,6 +94,7 @@ export default function Prompt() {
                     zIndex: 10,
                 }}
             >
+                {userData && <Typography>{userData}</Typography>}
                 <TextField
                     variant="outlined"
                     fullWidth
