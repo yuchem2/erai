@@ -12,7 +12,7 @@ interface Inputs {
 }
 
 export default function CrawlingInput() {
-    const { register, handleSubmit } = useForm<Inputs>()
+    const { register, handleSubmit, resetField } = useForm<Inputs>()
     const [userdata, setUserData] = useState([])
 
     const mutation = useMutation({
@@ -20,7 +20,7 @@ export default function CrawlingInput() {
             return postUserdata(request)
         },
         onSuccess: (data: IPostUserdataResponse) => {
-            console.log(data.data)
+            resetField('url')
             setUserData(data.data)
         },
     })
