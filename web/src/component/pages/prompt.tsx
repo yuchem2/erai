@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Box, TextField, Typography } from '@mui/material'
+import { Box, CircularProgress, TextField, Typography } from '@mui/material'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
 import { postPrompt } from '@/api/prompt'
@@ -11,15 +11,20 @@ interface Inputs {
 }
 
 export default function Prompt() {
-    const { register, handleSubmit } = useForm<Inputs>()
-    const [userData, setUserData] = useState('')
+    const { register, handleSubmit, resetField } = useForm<Inputs>()
+    const [userData, setUserData] = useState<string[]>([])
+    const [loading, setloading] = useState<boolean>(false)
+
     const mutation = useMutation({
         mutationFn: (request: { prompt: string }) => {
+            setUserData([...userData, request.prompt])
+            setloading(true)
             return postPrompt(request)
         },
-        onSuccess: (data: string) => {
-            console.log(data)
-            setUserData(data)
+        onSuccess: (data: { prompt: string }) => {
+            resetField('prompt')
+            setloading(false)
+            setUserData([...userData, data.prompt])
         },
     })
 
@@ -50,6 +55,35 @@ export default function Prompt() {
             >
                 글 생성을 도와드릴까요?
             </Typography>
+            <Box sx={{ padding: '10px', marginBottom: '20px', maxHeight: '60vh', overflowY: 'auto' }}>
+                {userData.map((data, index) => (
+                    <Box
+                        key={index}
+                        sx={{
+                            marginBottom: '10px',
+                            transition: 'transform 0.3s ease-out',
+                            transform: `translateY(${index * 10}px)`,
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: index % 2 === 0 ? 'flex-end' : 'flex-start',
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                width: '60%',
+                                backgroundColor: index % 2 === 0 ? '#5F5E5E' : '#262626',
+                                color: '#FFFFFF',
+                                borderRadius: '10px',
+                                padding: '10px',
+                            }}
+                        >
+                            {data}
+                        </Typography>
+                    </Box>
+                ))}
+            </Box>
+
+            {loading && <CircularProgress sx={{ marginBottom: '50px', marginTop: '20px', color: '#D1D1D1' }} />}
             <Box
                 sx={{
                     display: 'flex',
@@ -57,14 +91,14 @@ export default function Prompt() {
                     alignItems: 'center',
                     width: '100%',
                     maxWidth: '700px', // 입력창 너비 제한
+                    zIndex: 10,
                 }}
             >
-                {userData && <Typography>{userData}</Typography>}
                 <TextField
                     variant="outlined"
                     fullWidth
                     placeholder="메시지 to ERAI"
-                    {...register('url')}
+                    {...register('prompt')}
                     onKeyDown={handleKeyDown}
                     sx={{
                         backgroundColor: '#646464',
@@ -91,6 +125,18 @@ export default function Prompt() {
                         },
                     }}
                 />
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{
+                        fontSize: '15px',
+                        color: '#878787',
+                        marginTop: '10px',
+                    }}
+                >
+                    ERAI는 실수를 자주합니다...확인해주세요.
+                </Typography>
             </Box>
         </div>
     )
