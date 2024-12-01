@@ -1,11 +1,11 @@
 'use client'
 
-import {Box, CircularProgress, TextField, Typography} from '@mui/material'
-import {SubmitHandler, useForm} from 'react-hook-form'
-import {useState} from 'react'
-import {useMutation} from '@tanstack/react-query'
-import {IPostUserdataRequest, IPostUserdataResponse} from '@/types/user'
-import {postUserdata} from '@/api/user'
+import { Box, CircularProgress, TextField, Typography } from '@mui/material'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { IPostUserdataRequest, IPostUserdataResponse } from '@/types/user'
+import { postUserdata } from '@/api/user'
 
 interface Inputs {
     url: string
@@ -13,7 +13,7 @@ interface Inputs {
 
 export default function CrawlingInput() {
     const { register, handleSubmit } = useForm<Inputs>()
-    const [ userdata, setUserData ] = useState([])
+    const [userdata, setUserData] = useState([])
 
     const mutation = useMutation({
         mutationFn: (request: IPostUserdataRequest) => {
@@ -132,6 +132,4 @@ export default function CrawlingInput() {
             </Box>
         )
     }
-
-
 }

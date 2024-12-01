@@ -38,3 +38,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 apps/web/next-env.d.ts
+
+public/models
