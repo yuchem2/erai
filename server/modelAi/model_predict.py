@@ -25,7 +25,7 @@ def generate_response(prompt, model, tokenizer, max_length=300):
 
 
 def predict(prompt):
-    model_id = 'D:\erai\server\modelAi\SmolLM2-135M-ERAI'
+    model_id = 'D:\erai\server\modelAi\SmolLM2-135M-ERAI' # 모델 경로 설정
 
     tokenizer = AutoTokenizer.from_pretrained(model_id, **{"low_cpu_mem_usage": True})
     model = AutoModelForCausalLM.from_pretrained(

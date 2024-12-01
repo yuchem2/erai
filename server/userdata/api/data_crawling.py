@@ -9,7 +9,7 @@ import time
 # Selenium WebDriver 설정
 def get_driver():
     options = Options()
-    options.add_argument("--headless")  # 브라우저 창 없이 실행
+    options.add_argument("--headless")
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     service = Service("C:\Program Files\chromedriver.exe")  # ChromeDriver 경로 설정
@@ -20,16 +20,14 @@ def get_driver():
 def crawl_tistory_blog_content(url, driver):
     try:
         driver.get(url)
-        time.sleep(1)  # 페이지 로딩 대기
+        time.sleep(1)
         
-        # 권한 제한 페이지 처리
         if "권한이 없습니다" in driver.page_source:
             print(f"권한이 없는 글: {url}")
             return None
 
-        # 제목과 내용을 가져오기
         paragraphs = driver.find_elements(By.TAG_NAME, 'p')
-        text_content = [p.text for p in paragraphs if p.text.strip()]  # 빈 텍스트는 제외
+        text_content = [p.text for p in paragraphs if p.text.strip()]
         combined_text = " ".join(text_content[:-5])
         combined_text = combined_text.replace(" 비밀댓글입니다.", "")
         return {"title": url, "content":combined_text}
