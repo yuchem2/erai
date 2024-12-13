@@ -6,7 +6,6 @@
 
 HuggingFace의 SmolLM2-135M-Instruct 모델(https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct)을 이용해 개인의 "스타일"을 학습해 문단을 생성해 내는 것이 목표입니다.
 
-현재 학습양이 부족해 정확도가 매우 부족한 형태입니다. 추가적인 학습이 필요합니다.
 
 ## Getting Started
 
