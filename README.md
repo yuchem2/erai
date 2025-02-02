@@ -9,7 +9,7 @@ HuggingFace의 SmolLM2-135M-Instruct 모델(https://huggingface.co/HuggingFaceTB
 
 ## Getting Started
 
-`/web` 프로젝트의 경우 next, pnopm이 필요합니다. `/server` 프로젝트의 경우 django, poetry 환경 작업이 필요합니다.
+`/web` 프로젝트의 경우 next, pnpm이 필요합니다. `/server` 프로젝트의 경우 django, poetry 환경 작업이 필요합니다.
 
 ### web
 
